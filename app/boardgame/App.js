@@ -10,29 +10,47 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableHighlight, Alert } from 'react-native';
+
+function onPressedCard(color) {
+  const randomNumber = Math.floor(Math.random() * 6) + 1;
+  const msg = "Follow instructions on card pile: " + randomNumber;
+  Alert.alert(color + " card", msg)
+}
 
 function PlayScreen({navigation}) {
+  const cardText = "Take this card";
   return (
     <View style={styles.playButton}>
       <View style={styles.cardRow}>
+      <TouchableHighlight onPress={() => onPressedCard('green')}>
       <View style={styles.card, styles.green}>
-        <Text> </Text>
+        <Text> {cardText} </Text>
+        <View style={styles.cardBox}></View>
       </View>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => onPressedCard('blue')}>
       <View style={styles.card, styles.blue}>
-        <Text> </Text>
+        <Text> {cardText} </Text>
+        <View style={styles.cardBox}></View>
       </View>
+      </TouchableHighlight>
       </View>
       <View style={styles.cardRow}>
+      <TouchableHighlight onPress={() => onPressedCard('yellow')}>
       <View style={styles.card, styles.yellow}>
-        <Text> </Text>
+        <Text> {cardText} </Text>
+        <View style={styles.cardBox}></View>
       </View>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => onPressedCard('red')}>
       <View style={styles.card, styles.red}>
-        <Text> </Text>
+        <Text> {cardText} </Text>
+        <View style={styles.cardBox}></View>
       </View>
+      </TouchableHighlight>
       </View>
       <View style={styles.dice}>
-
       </View>
     <View style={styles.footer}>
       <Button
@@ -107,7 +125,7 @@ const styles = StyleSheet.create({
   playButton: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'stretch'
   },
   login: {
@@ -119,10 +137,14 @@ const styles = StyleSheet.create({
   dice: {
   },
   card: {
-    flex: 1,
+    justifyContent: 'center',
+  },
+  cardBox: {
+    height: 200,
+    width: 200,
   },
   cardRow: {
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
   },
   green: {
